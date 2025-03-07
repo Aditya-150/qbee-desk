@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="text-content py-20 flex flex-col items-center justify-center max-w-7xl mx-auto">
       <div className="flex flex-row items-center justify-between w-full py-10 border-b border-content/20">
         <div className="flex flex-row items-center justify-center gap-4">
-          <Image src="/logo-dark.svg" width={72} height={72} alt="Logo" />
+          <Link href="/"><Image src="/logo-dark.svg" width={72} height={72} alt="Logo" /></Link>
           <p className="font-medium text-content">Lorem ipsum dolor sit amet consectetur.</p>
         </div>
         <div className="flex flex-row items-center justify-center gap-4">

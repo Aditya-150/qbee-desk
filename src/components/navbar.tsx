@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-background">
       <div className="font-[family-name:var(--font-inter)]  px-4 py-6 flex justify-between items-center max-w-7xl mx-auto">
-        <Image src="/logo-dark.svg" width={72} height={72} alt="Logo" />
+        <Link href="/"><Image src="/logo-dark.svg" width={72} height={72} alt="Logo" /></Link>
         <NavigationMenuDemo />
         <div className="space-x-4">
           <Button variant="secondary" className="cursor-pointer bg-gradient-to-b from-primary from-0% via-80% via-dark-blue to-100% to-[#666666]  text-white transition-all duration-300 ease-in-out">Book Demo</Button>
