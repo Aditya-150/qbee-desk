@@ -1,10 +1,11 @@
 "use client";
 import { Button } from "./ui/button";
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,19 +16,102 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { ZapIcon } from "lucide-react";
+
 const Navbar = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-background">
-      <div className="font-[family-name:var(--font-inter)]  px-4 py-6 flex justify-between items-center max-w-7xl mx-auto">
-        <Link href="/"><Image src="/logo-dark.svg" width={72} height={72} alt="Logo" /></Link>
-        <NavigationMenuDemo />
-        <div className="space-x-4">
-          <Button variant="secondary" className="cursor-pointer bg-gradient-to-b from-primary from-0% via-80% via-dark-blue to-100% to-[#666666]  text-white transition-all duration-300 ease-in-out">Book Demo</Button>
-          <Button variant="outline" className="bg-transparent cursor-pointer">Sign Up</Button>
+    <motion.div 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-background"
+    >
+      <div className="relative font-[family-name:var(--font-inter)] w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 flex justify-between items-center">
+        <Link href="/">
+          <Image src="/logo-dark.svg" width={72} height={72} alt="Logo" className="w-16 sm:w-[72px]" />
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:block">
+          <NavigationMenuDemo />
         </div>
 
+        <div className="hidden md:flex space-x-4">
+          <Button variant="secondary" className="cursor-pointer bg-gradient-to-b from-primary from-0% via-80% via-dark-blue to-100% to-[#666666] text-white transition-all duration-300 ease-in-out">
+            Book Demo
+          </Button>
+          <Button variant="outline" className="bg-transparent cursor-pointer">
+            Sign Up
+          </Button>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden p-2"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="fixed top-[60px] left-0 right-0 bg-background border-t md:hidden py-4"
+            >
+              <div className="max-w-7xl mx-auto px-4">
+                <nav className="flex flex-col space-y-4">
+                  <div className="flex flex-col space-y-2">
+                    <Link 
+                      href="#features" 
+                      className="text-lg font-medium hover:text-primary transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Features
+                    </Link>
+                    <Link 
+                      href="/pricing" 
+                      className="text-lg font-medium hover:text-primary transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Pricing
+                    </Link>
+                    <Link 
+                      href="mailto:hello@example.com" 
+                      className="text-lg font-medium hover:text-primary transition-colors"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Contact
+                    </Link>
+                  </div>
+                  <div className="flex flex-col space-y-3 pt-4 border-t">
+                    <Button 
+                      variant="secondary" 
+                      className="w-full bg-gradient-to-b from-primary from-0% via-80% via-dark-blue to-100% to-[#666666] text-white"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Book Demo
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full bg-transparent"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Sign Up
+                    </Button>
+                  </div>
+                </nav>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

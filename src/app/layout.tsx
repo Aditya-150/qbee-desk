@@ -28,10 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${inter.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-x-hidden relative`}
       >
         <Navbar />
-        <main className="flex-grow">
+        <main className="flex-grow relative w-full">
           {children}
         </main>
         <Footer />

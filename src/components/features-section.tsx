@@ -1,8 +1,10 @@
+"use client"
 import React from 'react'
 import SubHeader from './ui/sub-header'
 import SectionHeader from './ui/section-header'
-import { BanknoteIcon, BarChartIcon, CalendarClockIcon, CheckCheckIcon, CompassIcon, HandCoinsIcon, HandshakeIcon, ListCheckIcon, MapPinIcon, PieChartIcon } from 'lucide-react'
+import { BarChartIcon, CalendarClockIcon, CheckCheckIcon, CompassIcon, HandCoinsIcon, HandshakeIcon, ListCheckIcon, MapPinIcon, PieChartIcon } from 'lucide-react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 // import Image from 'next/image'
 
 const features = [
@@ -34,7 +36,7 @@ const features = [
         icon: <CheckCheckIcon size={14} />,
         reverse: true,
         subTitle: "Task Assigned",
-        title: "Task and Project Management",
+        title: "Task & Employee Management",
         description: "Organize and assign tasks with ease. Whether it's daily to-dos or big projects, our system keeps everyone aligned and moving forward - without the stress.",
         image: "/features/features-2.webp",
         benefits: [
@@ -56,7 +58,7 @@ const features = [
         icon: <HandshakeIcon size={14} />,
         reverse: false,
         subTitle: "HR Systems",
-        title: "Comprehensive ERP & HR Tools",
+        title: "Comprehensive HR Tools",
         description: "From HR processes to resource planning, our solution simplifies your workflow. Enjoy friendly guidance every step of the way to keep your operations smooth and efficient.",
         image: "/features/features-3.webp",
         benefits: [
@@ -70,11 +72,6 @@ const features = [
                 title: "Expense Tracking",
                 icon: <HandCoinsIcon size={16} />,
                 description: "Easily track and manage expense records with our intuitive system—ensuring accurate financial records and transparent spending for your organization."
-            }, {
-                id: 3,
-                title: "Reimbursement Management",
-                icon: <BanknoteIcon size={16} />,
-                description: "Streamline the reimbursement process with our efficient system—ensuring quick approvals and seamless financial settlements for your employees."
             },
         ]
     },
@@ -82,7 +79,7 @@ const features = [
 
 const FeaturesSection = () => {
     return (
-        <section className="flex flex-col items-center justify-center py-20 relative">
+        <section className="flex flex-col items-center justify-center py-10 md:py-20 relative px-4 md:px-6">
             {/* <Image
                 src="/Features_section.png"
                 alt="Features Background"
@@ -92,50 +89,111 @@ const FeaturesSection = () => {
                 priority
                 quality={100}
             /> */}
-            <SubHeader title="Testimonials" />
-            <SectionHeader title="Simplify Your Workflow & Empower Your Team" className="text-5xl w-1/2 text-center" />
-            <p className="text-base w-1/2 text-center text-content mb-24">Experience real-time employee tracking, effortless task management, and smart HR tools—all designed with a friendly, intuitive touch to keep your business moving smoothly.</p>
-            <div className="flex flex-col items-center justify-center w-full max-w-7xl mx-auto gap-y-40">
-                {
-                    features.map((feature) => (
-                        <div key={feature.id} className={`flex ${feature.reverse ? 'flex-row-reverse' : 'flex-row'} items-center justify-between w-full gap-x-8`}>
-                            <div className="flex-col">
-                                <div className="inline-flex flex-row items-center gap-x-1 text-[#874BF8] py-1.5 px-3 rounded-full bg-[#CDBEFE] border-2 border-[#874BF8]">
-                                    {feature.icon}
-                                    <p className="text-sm font-medium">{feature.subTitle}</p>
-                                </div>
-                                <h3 className="text-4xl font-medium mt-4">{feature.title}</h3>
-                                <p className="text-sm/relaxed text-content mt-4">{feature.description}</p>
-                                <div className="grid grid-cols-2 gap-5 mt-12">
-                                    {
-                                        feature.benefits.map((benefit) => (
-                                            <div key={benefit.id} className="flex flex-col gap-y-2">
-                                                <div className="flex flex-row items-center gap-x-2">
-                                                    <div className="inline-flex flex-row items-center gap-x-1 text-white p-2 rounded-lg bg-[#874BF8]">
-                                                        {benefit.icon}
-                                                    </div>
-                                                    <h4 className="text-base font-medium">{benefit.title}</h4>
-                                                </div>
-                                                <p className="text-sm/relaxed text-content">{benefit.description}</p>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="flex flex-col items-center justify-center"
+            >
+                <SubHeader title="Features" />
+                <SectionHeader title="Simplify Your Workflow" className="text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 lg:w-1/2 text-center" />
+                <p className="text-sm md:text-base w-full md:w-3/4 lg:w-1/2 text-center text-content mb-20 md:mb-36">Experience real-time employee tracking, effortless task management, and smart HR tools—all designed with a friendly, intuitive touch to keep your business moving smoothly.</p>
+            </motion.div>
+
+            <div className="flex flex-col items-center justify-center w-full max-w-7xl mx-auto gap-y-32 md:gap-y-72 relative">
+                {/* Timeline line - hidden on mobile */}
+                <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/20 via-primary to-primary/20 hidden md:block" />
+                
+                {features.map((feature) => (
+                    <motion.div
+                        key={feature.id}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 0.5 }}
+                        className={`flex flex-col ${feature.reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center justify-between w-full gap-8 md:gap-x-8 relative`}
+                    >
+                        {/* Timeline dot - hidden on mobile */}
+                        <motion.div 
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-primary ring-4 ring-primary/20 hidden md:block"
+                        />
+
+                        <motion.div 
+                            initial={{ opacity: 0, x: feature.reverse ? 50 : -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.7, delay: 0.3 }}
+                            className="flex-col w-full md:w-[45%]"
+                        >
+                            <div className="inline-flex flex-row items-center gap-x-1 text-[#874BF8] py-1.5 px-3 rounded-full bg-[#ECE6FF] border-2 border-[#874BF8]">
+                                {feature.icon}
+                                <p className="text-sm font-medium">{feature.subTitle}</p>
                             </div>
+                            <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium mt-4">{feature.title}</h3>
+                            <p className="text-sm/relaxed text-content mt-4">{feature.description}</p>
+                            <motion.div 
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true }}
+                                variants={{
+                                    visible: {
+                                        opacity: 1,
+                                        transition: {
+                                            staggerChildren: 0.1
+                                        }
+                                    },
+                                    hidden: {
+                                        opacity: 0
+                                    }
+                                }}
+                                className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-8 md:mt-12"
+                            >
+                                {feature.benefits.map((benefit) => (
+                                    <motion.div
+                                        key={benefit.id}
+                                        variants={{
+                                            visible: { opacity: 1, y: 0 },
+                                            hidden: { opacity: 0, y: 20 }
+                                        }}
+                                        transition={{ duration: 0.5 }}
+                                        className="flex flex-col gap-y-2"
+                                    >
+                                        <div className="flex flex-row items-center gap-x-2">
+                                            <div className="inline-flex flex-row items-center gap-x-1 text-white p-2 rounded-lg bg-[#874BF8]">
+                                                {benefit.icon}
+                                            </div>
+                                            <h4 className="text-base font-medium">{benefit.title}</h4>
+                                        </div>
+                                        <p className="text-sm/relaxed text-content">{benefit.description}</p>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+                        </motion.div>
+                        <motion.div
+                            initial={{ opacity: 0, x: feature.reverse ? -50 : 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.7, delay: 0.3 }}
+                            className="w-full md:w-[45%] order-first md:order-none"
+                        >
                             <Image
                                 src={feature.image}
                                 alt={feature.title}
-                                className="w-1/2 h-auto"
+                                className="w-full h-auto"
                                 width={1920}
                                 height={1080}
                             />
-                        </div>
-                    ))
-                }
+                        </motion.div>
+                    </motion.div>
+                ))}
             </div>
         </section>
     )
 }
-
 
 export default FeaturesSection

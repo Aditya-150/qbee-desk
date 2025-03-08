@@ -49,12 +49,12 @@ const FlipCarousel = () => {
     }, []);
 
     return (
-        <div className="relative h-[400px] w-[600px] flex items-center justify-center">
+        <div className="relative h-[300px] sm:h-[350px] lg:h-[400px] w-full max-w-[300px] sm:max-w-[450px] lg:max-w-[600px] mx-auto flex items-center justify-center">
             <AnimatePresence>
                 {cards.map((tweet, index) => (
                     <motion.div
                         key={tweet.content}
-                        className="absolute mt-20 w-full bg-white rounded-xl p-4 shadow-xl shadow-gray-500/30"
+                        className="absolute mt-12 sm:mt-16 lg:mt-20 w-full bg-white rounded-xl p-3 sm:p-4 shadow-xl shadow-gray-500/30"
                         style={{
                             transformOrigin: "top center",
                         }}
@@ -73,8 +73,8 @@ const FlipCarousel = () => {
                         }}
                     >
                         <div className="flex flex-col">
-                            <div className="flex gap-3">
-                                <div className="size-12 overflow-hidden rounded-full flex items-center justify-center">
+                            <div className="flex gap-2 sm:gap-3">
+                                <div className="size-10 sm:size-12 overflow-hidden rounded-full flex items-center justify-center">
                                     <Image
                                         src={tweet.avatar}
                                         alt={tweet.author}
@@ -85,18 +85,18 @@ const FlipCarousel = () => {
                                 </div>
                                <div className="flex flex-col">
                                     <div className="flex flex-row items-center gap-1">
-                                        <h4 className="font-semibold text-[15px]">{tweet.author}</h4>
-                                        <BadgeCheckIcon className="w-4 h-4 text-white" fill="blue" />
+                                        <h4 className="font-semibold text-[13px] sm:text-[15px]">{tweet.author}</h4>
+                                        <BadgeCheckIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="blue" />
                                     </div>
-                                    <p className="text-gray-500 text-[15px]">{tweet.handle}</p>
+                                    <p className="text-gray-500 text-[13px] sm:text-[15px]">{tweet.handle}</p>
                                </div>
                             </div>
                             <div className="flex-1">
-                                <p className="text-[15px] mt-3 leading-normal">{tweet.content}</p>
-                                <div className="flex items-center gap-1 mt-3 text-gray-500 text-sm">
+                                <p className="text-[13px] sm:text-[15px] mt-2 sm:mt-3 leading-normal line-clamp-3 sm:line-clamp-none">{tweet.content}</p>
+                                <div className="flex items-center gap-1 mt-2 sm:mt-3 text-gray-500 text-xs sm:text-sm">
                                     <span>{tweet.date}</span>
                                     <span>·</span>
-                                    <span>{tweet.platform}</span>
+                                    <span className="hidden sm:inline">{tweet.platform}</span>
                                 </div>
                             </div>
                         </div>
